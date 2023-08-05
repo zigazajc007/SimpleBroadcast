@@ -60,5 +60,3 @@ channels:
 #----------------------------------------------------------
 # If you plan to broadcast messages between multiple servers through bungeecord, enable this feature and place SimpleBroadcast plugin to bungeecord server as well.
 bungee_enabled: false
-# The name of the bungee server (Can be the same as in bugeecord)
-server_name: "Survival"
