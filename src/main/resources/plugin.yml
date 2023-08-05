@@ -1,0 +1,12 @@
+name: SimpleBroadcast
+version: '${project.version}'
+main: com.rabbitcompany.simplebroadcast.SimpleBroadcast
+api-version: '1.20'
+authors: [Black1_TV]
+description: Simple broadcast plugin
+website: https://rabbit-company.com
+commands:
+  broadcast:
+    usage: /<command>
+    aliases: [ bcast, bc ]
+    description: Broadcast message to multiple players
