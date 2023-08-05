@@ -1,6 +1,7 @@
 package com.rabbitcompany.simplebroadcast.commands;
 
 import com.rabbitcompany.simplebroadcast.SimpleBroadcast;
+import com.rabbitcompany.simplebroadcast.utils.Channel;
 import com.rabbitcompany.simplebroadcast.utils.Colors;
 import com.rabbitcompany.simplebroadcast.utils.Message;
 import org.bukkit.Bukkit;
@@ -47,27 +48,28 @@ public class Broadcast implements CommandExecutor {
 		String format = SimpleBroadcast.getInstance().getConf().getString("channels." + channel + ".format", "&7[&6Broadcast&7] {message}");
 		String senderPermission = SimpleBroadcast.getInstance().getConf().getString("channels." + channel + ".senderPermission", null);
 		String receiverPermission = SimpleBroadcast.getInstance().getConf().getString("channels." + channel + ".receiverPermission", null);
+		boolean bungee = SimpleBroadcast.getInstance().getConf().getBoolean("channels." + channel + ".bungee", false);
 
 		if(senderPermission != null && !sender.hasPermission(senderPermission)){
 			sender.sendMessage(Message.getMessage("permission"));
 			return true;
 		}
 
-		String senderUUID = UUID.randomUUID().toString();
-		if(sender instanceof Player){
-			Player player = (Player) sender;
-			senderUUID = player.getUniqueId().toString();
+		if(SimpleBroadcast.getInstance().getConf().getBoolean("bungee_enabled", false) && bungee) {
+			Channel.send(sender.getName(), "broadcast", UUID.randomUUID().toString(), channel, message);
+			sender.sendMessage(Message.getMessage("message_broadcasted_bungee"));
+			return true;
 		}
 
 		int amount = 0;
 		for(Player player : Bukkit.getServer().getOnlinePlayers()){
-			if(senderUUID.equals(player.getUniqueId().toString())) continue;
+			if(sender.getName().equals(player.getName())) continue;
 			if(receiverPermission != null && !player.hasPermission(receiverPermission)) continue;
 			player.sendMessage(Colors.toHex(Message.chat(format.replace("{message}", message))));
 			amount++;
 		}
 
-		sender.sendMessage(Message.getMessage("message_broadcasted_amount").replace("{amount}", String.valueOf(amount)));
+		sender.sendMessage(Message.getMessage("message_broadcasted").replace("{amount}", String.valueOf(amount)));
 		return true;
 	}
 

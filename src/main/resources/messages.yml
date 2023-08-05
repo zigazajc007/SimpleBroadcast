@@ -42,7 +42,8 @@ prefix: "&7[&6SB&7]"
 permission: "{prefix} &cYou don't have permission to do this!"
 reload: "{prefix} &7Plugin has been reloaded."
 invalid_channel: "{prefix} &cChannel doesn't exists."
-message_broadcasted_amount: "{prefix} &7Message has been broadcasted to &6{amount} &7players."
+message_broadcasted: "{prefix} &7Message has been broadcasted to &6{amount} &7players."
+message_broadcasted_bungee: "{prefix} &7Message has been broadcasted to bungeecord."
 #----------------------------------------------------------
 #                       Syntax
 #----------------------------------------------------------

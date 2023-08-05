@@ -1,0 +1,5 @@
+name: SimpleBroadcast-Bungee
+version: 1.0.0
+main: com.rabbitcompany.simplebroadcastbungee.SimpleBroadcastBungee
+description: SimpleBroadcast Bungee connector
+author: Black1_TV
