@@ -39,6 +39,11 @@ public final class SimpleBroadcast extends JavaPlugin implements PluginMessageLi
 		mkdir();
 		loadYamls();
 
+		Metrics metrics = new Metrics(this, 19434);
+		metrics.addCustomChart(new Metrics.SimplePie("bungeecord", () -> getConf().getString("bungee_enabled", "false")));
+
+		info("&aEnabling");
+
 		if(getConf().getBoolean("bungee_enabled", false)) {
 			getServer().getMessenger().registerOutgoingPluginChannel(this, "my:simplebroadcast");
 			getServer().getMessenger().registerIncomingPluginChannel(this, "my:simplebroadcast", this);
@@ -51,7 +56,7 @@ public final class SimpleBroadcast extends JavaPlugin implements PluginMessageLi
 
 	@Override
 	public void onDisable() {
-
+		info("&4Disabling");
 	}
 
 	public void mkdir() {
@@ -78,6 +83,32 @@ public final class SimpleBroadcast extends JavaPlugin implements PluginMessageLi
 
 	public YamlConfiguration getMess() {
 		return this.mess;
+	}
+
+	private void info(String message) {
+		String text = "\n\n";
+		text += "&8[]=======[" + message + " &cSimpleBroadcast&8]========[]\n";
+		text += "&8|\n";
+		text += "&8| &cInformation:\n";
+		text += "&8|\n";
+		text += "&8|   &9Name: &bSimpleBroadcast\n";
+		text += "&8|   &9Developer: &bBlack1_TV\n";
+		text += "&8|   &9Version: &b" + getDescription().getVersion() + "\n";
+		text += "&8|   &9Website: &bhttps://rabbit-company.com\n";
+		text += "&8|\n";
+		text += "&8| &cSponsors:\n";
+		text += "&8|\n";
+		text += "&8|   &9- &6https://rabbitserverlist.com\n";
+		text += "&8|\n";
+		text += "&8| &cSupport:\n";
+		text += "&8|\n";
+		text += "&8|   &9Discord: &bziga.zajc007\n";
+		text += "&8|   &9Mail: &bziga.zajc007@gmail.com\n";
+		text += "&8|   &9Discord: &bhttps://discord.gg/hUNymXX\n";
+		text += "&8|\n";
+		text += "&8[]=========================================[]\n";
+
+		Bukkit.getConsoleSender().sendMessage(Message.chat(text));
 	}
 
 	@Override
